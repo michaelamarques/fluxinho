@@ -1,7 +1,15 @@
 import { useEffect } from "react"
 import { supabase } from "../lib/supabase"import { useState } from "react"
 
-export default function Home() {
+export default function Home( useEffect(() => {
+  async function load() {
+    const { data, error } = await supabase.from("tasks").select("*")
+
+    console.log("SUPABASE TASKS:", data, error)
+  }
+
+  load()
+}, [])) {
   const [level] = useState(1)
   const [xp] = useState(0)
 
